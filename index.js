@@ -9,10 +9,24 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  const user = { name: "Aboubakr", age: 25 };
-  res.render("index", { user });
+
+// CLIENT 
+app.post("/api/payment", async (req, res) => {
+  const { amount, exchange, bigBills } = req.body;
+
+  // TODO: traitement + renvoie du exchange
+
+  res.render("change", { exchange });
 });
+
+app.get("/payment", (req, res) => {
+  res.render("payment");
+});
+
+app.get("/change", (req, res) => {
+  res.render("change");
+});
+
 
 await connectDb();
 
