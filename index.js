@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { connectDb } from "./config/db.js";
 
 dotenv.config();
 
@@ -13,16 +14,7 @@ app.get("/", (req, res) => {
   res.render("index", { user });
 });
 
-mongoose.connect(
-  process.env.MONGODB_URI,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log(`✅ MongoDB connexion établie`);
-  }
-);
+await connectDb();
 
 app.listen(process.env.PORT, () => {
   console.log(`✅ Server is running on port ${process.env.PORT}`);
