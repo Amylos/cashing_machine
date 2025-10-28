@@ -24,11 +24,6 @@ console.log(
   )}`
 );
 
-app.get("/", (req, res) => {
-  const user = { name: "Aboubakr", age: 25 };
-  res.render("index", { user });
-});
-
 // CLIENT
 app.post("/api/payment", async (req, res) => {
   const { amount, exchange, bigBills } = req.body;
@@ -63,11 +58,20 @@ app.post("/api/payment", async (req, res) => {
     await clientWallet.save();
 
     // 4️⃣ Renvoyer le rendu au client
-    res.render("change", { changeToGive: result.changeToGive });
+    // res.render("change", { changeToGive: result.changeToGive });
+    res.redirect("/change");
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Erreur serveur" });
   }
+});
+
+app.get("/payment", (req, res) => {
+  res.render("payment");
+});
+
+app.get("/change", (req, res) => {
+  res.render("change");
 });
 
 app.listen(process.env.PORT, () => {
