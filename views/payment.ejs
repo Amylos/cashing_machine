@@ -230,9 +230,13 @@
         })
           .then((res) => res.json())
           .then((result) => {
-            if (result.redirectUrl) {
-              // redirige vers la page de résultat
-              window.location.href = result.redirectUrl;
+            if (result.success) {
+              const query = encodeURIComponent(
+                JSON.stringify(result.changeToGive)
+              );
+              window.location.href = `/change?data=${query}`;
+            } else {
+              alert(result.message);
             }
           })
           .catch((err) => console.error(err));

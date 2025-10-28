@@ -58,8 +58,7 @@ app.post("/api/payment", async (req, res) => {
     await clientWallet.save();
 
     // 4️⃣ Renvoyer le rendu au client
-    // res.render("change", { changeToGive: result.changeToGive });
-    res.redirect("/change");
+    res.json({ success: true, changeToGive: result.changeToGive });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Erreur serveur" });
@@ -71,7 +70,16 @@ app.get("/payment", (req, res) => {
 });
 
 app.get("/change", (req, res) => {
-  res.render("change");
+  const { data } = req.query;
+  let changeToGive = {};
+
+  try {
+    if (data) changeToGive = JSON.parse(decodeURIComponent(data));
+  } catch (e) {
+    console.error("Erreur parsing change data");
+  }
+
+  res.render("change", { changeToGive });
 });
 
 app.listen(process.env.PORT, () => {
