@@ -30,7 +30,7 @@ class ExchangeService {
 
       exchange = new Exchange(initialCaisse);
       await exchange.save();
-      console.log("✅ Caisse créée en base");
+      console.info("✅ Caisse créée en base");
     }
     return exchange;
   }

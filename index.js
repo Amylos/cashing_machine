@@ -18,7 +18,7 @@ await connectDb();
 
 ExchangeService.createExchange();
 
-console.log(
+console.info(
   `Total de la caisse actuellement : ${ExchangeService.getTotalExchange(
     await ExchangeService.getExchange()
   )}`
@@ -36,13 +36,11 @@ app.post("/api/payment", async (req, res) => {
       bigBills
     );
 
-    console.log(result);
 
     if (!result.success) {
       return res.status(400).json(result);
     }
 
-    console.log("update");
 
     // 2️⃣ Mettre à jour la caisse existante
     const caisseDoc = await ExchangeService.getExchange();
@@ -83,5 +81,5 @@ app.get("/change", (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`✅ Server is running on port ${process.env.PORT}`);
+  console.info(`✅ Server is running on port ${process.env.PORT}`);
 });
