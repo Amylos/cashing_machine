@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
-    "start": "nodemon server.js",
-    "test:e2e": "npx cypress open"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open",
+    "dev": "nodemon server.js",
+    "start": "node index.js",
+    "start:prod": "node dist/index.min.js",
+    "build": "node build.js"
   },
   "type": "module",
   "keywords": [],

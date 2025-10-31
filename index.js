@@ -53,6 +53,14 @@ app.post("/api/payment", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.redirect("/payment");
+});
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Server is running" });
+});
+
 app.get("/payment", (req, res) => {
   res.render("payment");
 });
@@ -64,7 +72,7 @@ app.get("/change", (req, res) => {
   try {
     if (data) changeToGive = JSON.parse(decodeURIComponent(data));
   } catch (e) {
-    console.error("Erreur parsing change data");
+    console.error("Erreur parsing change data ");
   }
 
   res.render("change", { changeToGive });
