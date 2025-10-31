@@ -2,10 +2,10 @@ name: Make Docker image
 
 on:
   workflow_dispatch: ~
-  # workflow_run:
-  #   workflows: ["Unit Test & Functional Test & E2E Test"]
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows: ["Unit Test & Functional Test & E2E Test"]
+    types:
+      - completed
 
 jobs:
   make-docker:
